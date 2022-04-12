@@ -5,7 +5,7 @@ exports.getTasks = async (req, res) => {
     const tasks = await Task.find();
     return res.status(200).send(tasks);
   } catch (err) {
-    return res.status(400).send({ err });
+    return res.status(400).send({ err: 'Error fething tasks' });
   }
 };
 
@@ -15,7 +15,7 @@ exports.getTask = async (req, res) => {
     const task = await Task.findById(id);
     return res.status(200).send(task);
   } catch (err) {
-    return res.status(400).send({ err });
+    return res.status(400).send({ err: 'Error fething task' });
   }
 };
 
@@ -26,7 +26,7 @@ exports.addTask = async (req, res) => {
     const newTask = await task.save();
     return res.status(201).send(newTask);
   } catch (err) {
-    return res.status(400).send({ err });
+    return res.status(400).send({ err: 'Error creating task' });
   }
 };
 
@@ -37,7 +37,7 @@ exports.editTask = async (req, res) => {
     const task = await Task.findByIdAndUpdate(id, body, { new: true });
     return res.status(200).send(task);
   } catch (err) {
-    return res.status(400).send({ err });
+    return res.status(400).send({ err: 'Error occured while trying to edit' });
   }
 };
 
@@ -47,8 +47,10 @@ exports.deleteTask = async (req, res) => {
     await Task.findByIdAndDelete(id);
     return res
       .status(200)
-      .send({ status: 'OK', message: 'Task Successfully deleted' });
+      .send({ status: 'OK', message: 'Task deleted sussessfuly' });
   } catch (err) {
-    return res.status(400).send({ err });
+    return res
+      .status(400)
+      .send({ message: 'Error occured. Delete Unsuccessful' });
   }
 };
