@@ -8,9 +8,7 @@ const taskRoutes = require('./routes/task');
 const app = express();
 dotenv.config();
 
-mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost:27017/actonic'
-);
+mongoose.connect(process.env.MONGODB_URI);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
